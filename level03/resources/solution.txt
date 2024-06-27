@@ -1,0 +1,9 @@
+There is a file in the home directory called "level03". The permissions on the file are:
+
+-rwsr-sr-x 1 flag03 level03 8627 Mar  5  2016 level03
+
+The "rws" permission means that the file runs as the user "flag03". This program tries to call echo to print "Explout me". we changed the PATH using this command:
+
+export PATH=/tmp:$PATH
+
+This adds /tmp to the front of PATH and means calling echo will search /tmp first. We added a script called "echo" in /tmp that calls /bin/getflag. Running "level03" searches /tmp first and calls our script before the real echo command. This shows the flag for level04. There is no password for flag03.

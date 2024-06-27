@@ -1,0 +1,5 @@
+In file /etc/passwd there is a line:
+
+flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+
+Using John the Ripper will give you the password "abcdefg". This is the password for flag01.

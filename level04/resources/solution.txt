@@ -1,0 +1,13 @@
+There is a perl script in the home folder called "level04.pl". The script shows that there is a webserver accessible at http://localhost:4747. We can call the perl script from this url:
+
+http://localhost:4747/level04.pl
+
+We can send the parameter x with this url:
+
+http://localhost:4747/level04.pl?x=abc
+
+This will print "abc" if we call this url with curl. We can inject our own command by using back ticks like this:
+
+http://localhost:4747/level04.pl?x=`/bin/getflag`
+
+The back tick command will be run first and will show the flag for level04. There is no password for flag04.

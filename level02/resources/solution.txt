@@ -1,0 +1,1 @@
+In the home folder there is a file called "level02.pcap". Decoding this file with WireShark shows a tcp flow with the text "ft_wandr...NDRel.L0L". The hex dump shows that the dots are backspace chars. This means that the password is: "ft_waNDReL0L".

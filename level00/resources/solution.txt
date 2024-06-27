@@ -1,0 +1,5 @@
+In /usr/sbin there is a file called "john" with these attributes:
+
+----r--r-- 1 flag00 flag00 15 Mar  5  2016 john
+
+The file contains the code "cdiiddwpgswtgt" which decodes to "nottoohardhere" with ROT-15. This is the password for flag00.

