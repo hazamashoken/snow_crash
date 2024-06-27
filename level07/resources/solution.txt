@@ -1,0 +1,11 @@
+There is a file in the home directory called level07. This file runs as flag07 and calls "/bin/echo $LOGNAME". By changing the LOGNAME ENV variable we can force thr app to run /bin/getflag as the flag07 user.
+
+First we changed the LOGNAME variable:
+
+export LOGNAME=';getflag'
+
+Or we can use back ticks:
+
+export LOGNAME='`getflag`'
+
+This results in printing the level07 flag. There is no password for flag07.
