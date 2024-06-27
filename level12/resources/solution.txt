@@ -1,0 +1,49 @@
+In this level we have a perl server running on port 4646 accepting 2 pathParam x and y
+
+base on the `level.pl` we can see that 
+the param 'x' is can be use to do arbitrary code execution.
+but we need to escape the formatting:
+- it will be convert to uppercase
+- any whitespace and all after it will be remove
+
+```
+#!/usr/bin/env perl
+# localhost:4646
+use CGI qw{param};
+print "Content-type: text/html\n\n";
+
+sub t {
+  $nn = $_[1];
+  $xx = $_[0];
+  $xx =~ tr/a-z/A-Z/; 
+  $xx =~ s/\s.*//;
+  @output = `egrep "^$xx" /tmp/xd 2>&1`;
+  foreach $line (@output) {
+      ($f, $s) = split(/:/, $line);
+      if($s =~ $nn) {
+          return 1;
+      }
+  }
+  return 0;
+}
+
+sub n {
+  if($_[0] == 1) {
+      print("..");
+  } else {
+      print(".");
+  }    
+}
+
+n(t(param("x"), param("y")));
+```
+
+We initally try to run the code but redirect does not work due to egrep.
+Hence we try to call other script via. We create a script called /tmp/GETFLAG.
+To escape the uppercase formatting but since its in the tmp we need to call it via absolute path however by calling it /tmp/GETFLAG, /tmp will be formatted.
+hence we use wildcard to remove the /tmp resulting in the '`/*/GETFLAG`' as the payload.
+
+by calling
+'curl http://localhost:4646/?x='`/*/GETFLAG`'
+
+we can now view the flag in /tmp/flag_11
