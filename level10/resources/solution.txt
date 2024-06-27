@@ -1,1 +1,53 @@
-On this level there is a binary 'level10'
+On this level there is an app 'level10' which try to send file over inet on port 6969
+
+while using `nc -lk 6969`
+we can ltrace on `./level10 ./level10 127.0.0.1`
+
+```
+level10@SnowCrash:~$ ltrace ./level10 ./level10 127.0.0.1
+__libc_start_main(0x80486d4, 3, 0xbffff7d4, 0x8048970, 0x80489e0 <unfinished ...>
+access("./level10", 4)                  = 0
+printf("Connecting to %s:6969 .. ", "127.0.0.1") = 32
+fflush(0xb7fd1a20Connecting to 127.0.0.1:6969 .. )                      = 0
+socket(2, 1, 0)                         = 3
+inet_addr("127.0.0.1")                  = 0x0100007f
+htons(6969, 1, 0, 0, 0)                 = 14619
+connect(3, 0xbffff71c, 16, 0, 0)        = -1
+printf("Unable to connect to host %s\n", "127.0.0.1"Unable to connect to host 127.0.0.1
+) = 36
+exit(1 <unfinished ...>
++++ exited (status 1) +++
+```
+
+and see that the app is using access to check for file permission before sending the file over.
+We can expliot this base on an documented expliot: 
+https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use
+
+by explioting the gap between access and open we can try to symlink the `token` file to the dummy file use initially and send the token content to the host.
+
+
+
+by running send.sh and symlink.sh on infinite loop it create many opportunites for the bug to occured and send over the content of the file.
+
+```
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+woupa2yuojeeaaed06riuj63c
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+.*( )*.
+```
+
+and using this password to access the flag10 account, we can call getflag.
+
