@@ -1,0 +1,9 @@
+There is a app called level08 that prints the contents of a file. There is also a file called "token" that contains the password for flag08. We don't have permission to read "token" and the level08 app will not read files called "token". We created a symbolic link in /tmp:
+
+ln -s ~/token /tmp/test
+
+Then called the level08 app to read the contents of the link:
+
+./level08 /tmp/test
+
+This returns quif5eloekouj29ke0vouxean which is the password for flag08.
